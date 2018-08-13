@@ -1,0 +1,87 @@
+<!-- HTML form for creating a product -->
+<div class="row">
+  <div class="col-md-8">
+  
+  <!--
+    1. Bind our HTML form to Angular using [formGroup]
+    2. If form was submitted, call createProduct() method of CreateProductComponent
+  -->
+  <form [formGroup]="insertPravilo_form" (ngSubmit)="insertPravilo()">
+  <table class="table table-hover table-responsive table-bordered">
+    <tr>
+      <th>Opis</th>
+      <th>Kvota 1</th>
+      <th>Kvota 2</th>
+      <th>Razlika</th>
+    </tr>
+    <!-- Use *ngFor directive to loop throught our list of products. -->
+    <tr *ngFor="let pravilo of pravila; let i = index">
+        <td>{{pravilo.opis}}</td>
+        <td>{{pravilo.kvota1}}</td>
+        <td>{{pravilo.kvota2}}</td>
+        <td>{{pravilo.razlika}}</td>
+        <td>
+            <!-- delete product button -->
+            <a (click)="deletePravilo(pravilo.id, i)" class='btn btn-danger m-r-5px'>
+                <span class='glyphicon glyphicon-remove'></span>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>          <!-- Bind this input field to our 'angular form field' using formControlName -->
+            <input
+                formControlName="opis"
+                name="opis" type="text"
+                class="form-control" required />
+  
+            <!-- show this error if the field is 'empty' and 'touched' -->
+            <div
+                *ngIf="insertPravilo_form.get('opis').touched && insertPravilo_form.get('opis').hasError('required')"
+                class="alert alert-danger">
+                Opis je obavezan.
+            </div></td>
+        <td>          <input
+                formControlName="kvota1"
+                type="number" name="kvota1"
+                class="form-control" required />
+  
+            <!-- show this error if the field is 'empty' and 'touched' -->
+            <div
+                *ngIf="insertPravilo_form.get('kvota1').touched && insertPravilo_form.get('kvota1').hasError('required')"
+                class="alert alert-danger">
+            Kvota je obavezna.
+            </div></td>
+        <td>        <input
+              formControlName="kvota2"
+              type="number" name="kvota2"
+              class="form-control" required />
+  
+          <!-- show this error if the field is 'empty' and 'touched' -->
+          <div
+              *ngIf="insertPravilo_form.get('kvota2').touched && insertPravilo_form.get('kvota2').hasError('required')"
+              class="alert alert-danger">
+          Kvota je obavezna.
+          </div></td>
+        <td>        <input
+              formControlName="razlika"
+              type="number" name="razlika"
+              class="form-control" required />
+  
+          <!-- show this error if the field is 'empty' and 'touched' -->
+          <div
+              *ngIf="insertPravilo_form.get('razlika').touched && insertPravilo_form.get('razlika').hasError('required')"
+              class="alert alert-danger">
+          razlika je obavezna.
+          </div></td>
+        <td>
+            <!-- disable the submit button if the form is 'invalid' -->
+            <button class="btn btn-primary" type="submit" [disabled]="insertPravilo_form.invalid">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+  </table>
+  </form>
+  
+  </div>
+  </div>

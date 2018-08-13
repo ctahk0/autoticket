@@ -1,0 +1,14 @@
+{
+  "/oddsapi/*": {
+    "target": "http://www.oddsmath.com/api/v1",
+    "secure": false,
+    "logLevel":"debug",
+    "pathRewrite": {"^/oddsapi" : ""}
+  },
+  "/locapi/*": {
+    "target": "http://localhost/_dev/angularodds/src/app/php/",
+    "secure": false,
+    "logLevel":"debug",
+    "pathRewrite": {"^/locapi" : ""}
+  }
+}
