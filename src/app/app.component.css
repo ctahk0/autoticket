@@ -1,5 +1,78 @@
+*{margin: 0;}
+.navhdr{ 
+  display: flex;
+}
+.navhdr{
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 20px;
+}
+
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
+}
+/* important stuff for this example */
+.header {
+  font-weight: bold;
+}
+.row {
+  display:flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  font-size: 0.9em;
+  width: 90%;
+} 
+
+.row1 {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  background-color: lightslategrey;
+  font-size: 0.9em;
+}
+.flex__item {
+  border-radius: 3px;
+  color: rgb(36, 36, 31);
+  box-sizing: border-box;
+  /* font-size: 0.8em; */
+  padding: 0.1em;
+  text-align: center;
+  margin: 0.05em;
+  background: lightgray;
+  height: 35px;
+  width: 100px;
+  flex: auto;
+}
+.flex__item1 {
+  border-radius: 1px;
+  color: rgb(36, 36, 31);
+  box-sizing: border-box;
+  /* font-size: 0.8em; */
+  padding: 0.05em;
+  text-align: center;
+  /* margin: 0.05em; */
+  /* background: lightgray; */
+  height: 15px;
+  /* width: 100px; */
+  flex: auto;
+}
+.current {
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 1px;
+  color: rgb(82, 79, 79);
+  /* background: rgb(121, 118, 118); */
+  /* width: 100px; */
+  flex: 0 0 auto;
+  /* background-color: yellowgreen; */
+}
+.flex-cdate{
+  flex: 0 1 auto;
+}
+.box {
+  display: flex;
+  align-items: stretch;
 }
