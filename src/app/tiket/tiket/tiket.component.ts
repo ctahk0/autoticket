@@ -13,31 +13,48 @@ import { MatchService } from '../../match.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TiketComponent implements OnInit {
-    displayedColumns: string[] = ['dTime', 'HomeTeam', 'AwayTeam', 'tip', 'odds', 'napomena', 'razlika', 'rezultat', 'profit'];
+    // tslint:disable-next-line:max-line-length
+    displayedColumns: string[] = ['dTime', 'HomeTeam', 'AwayTeam', 'tip', 'odds', 'curr', 'napomena', 'razlika', 'rezultat', 'profit'];
     dataSource: MatTableDataSource<any>;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+    showAll = 0;
     tiket = [];
+    tiketall = [];
     // tiketsum = 0;
     // private chRef: ChangeDetectorRef
     constructor(private matchService: MatchService, private chRef: ChangeDetectorRef ) { }
 
     ngOnInit() {
         this.showTiket();
+        // console.log(this.oddsSum().sumodds);
+    }
+    toggleAll(tg: number) {
+        tg === 1 ? this.showAll = 1 : this.showAll = 0;
+        this.updateTiket();
+    }
+    getCurrentOdds(tip: string, ah1: number, ah2: number) {
+        return (tip === '1' ? ah1 : ah2);
+    }
+
+    oddsSum() {
+        let sumo = 0;
+        let sumc = 0;
+        this.tiket.forEach(el => {
+            sumo += Number(el.odds);
+            sumc += (el.tip === '1' ? Number(el.cah0_1) : Number(el.cah0_2));
+            // console.log(el.HomeTeam, ' prof: ',  Number(el.profit));
+        });
+        return {
+            'sumodds': sumo.toFixed(1),
+            'sumcurr': sumc.toFixed(1)
+        };
     }
 
     /** GET total sum profit */
     profitSum() {
         return this.tiket.map(t => Number(t.profit)).reduce((acc, value) => acc + value, 0);
     }
-    // profitSum(): number {
-    //     let sum = 0;
-    //     this.tiket.forEach(el => {
-    //         sum += Number(el.profit);
-    //         // console.log(el.HomeTeam, ' prof: ',  Number(el.profit));
-    //     });
-    //     return sum;
-    // }
 
     // this is filter from material table
     applyFilter(filterValue: string) {
@@ -53,6 +70,12 @@ export class TiketComponent implements OnInit {
             this.tiket = data;
             // this.tiket.push('profit', data['rezultat'] * data['odds']);
             // this.tiket = this.calcProfit(this.tiket);   // just add some extra fields to array object tiket
+            if (!this.showAll) {
+                this.tiket = this.tiket.filter(function(t) {
+                    return t.rezultat == 3;
+                });
+            }
+            // console.log(this.tiket);
             this.chRef.detectChanges();
             console.log(this.profitSum());
             // console.log(this.tiket);
@@ -68,9 +91,11 @@ export class TiketComponent implements OnInit {
         this.matchService.readTiket()
         .subscribe((data: any[]) => {
             this.tiket = data;
-            // const copiedData = this.tiket.slice();
-            // copiedData.push({item:'Koka kola', cost:20});
-            // this.tiket = copiedData;
+            if (!this.showAll) {
+                this.tiket = this.tiket.filter(function(t) {
+                    return t.rezultat == 3;
+                });
+            }
             this.chRef.detectChanges();
             this.dataSource = new MatTableDataSource(this.tiket);
             this.dataSource.paginator = this.paginator;
@@ -96,9 +121,9 @@ export class TiketComponent implements OnInit {
     }
 
     /** UPDATE */
-    rezultTiket(rez: number, gameID: string, row: any) {
-        // console.log('op', row);
-        const foundIndex = this.tiket.findIndex(x => x.gameID === gameID);
+    rezultTiket(rez: number, gameID: string, napomena: string) {
+        console.log('napm: ', napomena);
+        const foundIndex = this.tiket.findIndex(x => x.gameID === gameID && x.napomena === napomena);
         console.log(gameID, ' - Found index', foundIndex);
         if (rez === 1) {
             this.tiket[foundIndex].profit += Number(this.tiket[foundIndex].odds) - 1;

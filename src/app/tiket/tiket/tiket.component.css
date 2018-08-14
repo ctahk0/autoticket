@@ -11,4 +11,14 @@
 .mat-sort-header-container {
     display:flex;
     justify-content:center;
-  }
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.left, .right {
+    display: inline-block;
+    width: 50%;
+}
