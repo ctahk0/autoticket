@@ -17,8 +17,10 @@ import { TiketComponent } from './tiket/tiket/tiket.component';
 
 export class AppComponent {
   @ViewChild(TiketComponent) child: TiketComponent;
-  public show = false;
-  public buttonName: any = 'Pravila';
+  show = false;
+  showodds = false;
+  buttonName = 'Pravila';
+  buttonOdds = 'Show odds';
   title = 'Hello there';
   teams = [];
   a = 30;
@@ -161,29 +163,17 @@ export class AppComponent {
       });
   }
 
-  // jq() {
-  //   $(document).ready(function() {
-  //     // let _frstChg = true;
-  //     $('div').on('DOMSubtreeModified', 'span', function () {
-  //       // $(this).effect('highlight', {}, 3000);
-  //       // const elem = $(this)[0].id;
-  //       //     $('#' + elem).fadeOut(300);
-  //       //     $('#' + elem).fadeIn(300);
-  //       //     $('#' + elem).fadeOut(300);
-  //       //     $('#' + elem).fadeIn(300);
-  //     });
-  //   });
-  // }
-
   toggle() {
     this.show = !this.show;
 
     // CHANGE THE NAME OF THE BUTTON.
-    if (this.show) {
-      this.buttonName = 'X';
-    } else {
-      this.buttonName = 'Pravila';
-    }
+    this.show ? this.buttonName = 'X' : this.buttonName = 'Pravila';
+  }
+
+  toggleOdds() {
+    this.showodds = !this.showodds;
+    // CHANGE THE NAME OF THE BUTTON.
+    this.showodds ? this.buttonOdds = 'Hide' : this.buttonOdds = 'Show odds';
   }
 
   trackElement(index: string, element: any) {

@@ -61,7 +61,7 @@
 
         <!-- Napomena Column -->
         <ng-container matColumnDef="napomena">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Pravilo </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Rule </th>
             <td mat-cell *matCellDef="let row" style="color: lightgray;"> {{row.napomena}} </td>
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>    
@@ -75,7 +75,7 @@
 
         <!-- Buttons Column -->
         <ng-container matColumnDef="rezultat">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Rezultat </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Result </th>
             <td mat-cell *matCellDef="let row">  
                 <mat-button-toggle-group [(ngModel)]="row.rezultat" name="selrez">
                     <mat-button-toggle value="1" (click)="rezultTiket(1, row.gameID, row.napomena)"><span class="btnwin">Win</span></mat-button-toggle>

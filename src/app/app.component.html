@@ -13,6 +13,12 @@
               {{ buttonName }}
           </button>
       </div>
+      <span>&nbsp;</span>
+      <div>
+          <button class='btn btn-info' (click)="toggleOdds()" id="bt1">
+              {{ buttonOdds }}
+          </button>
+      </div>
       <div style="text-align:right; min-width: 80%;">
           <h2>Refreshing in: {{ a }} <Button class='btn btn-success' (click)="getOdds()">Refresh</Button></h2>
       </div>
@@ -23,75 +29,36 @@
   </div>
   </header>
   <div class="box">
-    <section class="showme">  <!-- LIJEVA STRANA-->
-      <!-- <Button class='btn btn-danger' (click)="test()">Test</Button> -->
-      <!-- <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-          <ng-container matColumnDef="dtime">
-            <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.dtime}}</mat-cell>
-          </ng-container>
-        
-
-          <ng-container matColumnDef="hometeam">
-            <mat-header-cell *matHeaderCellDef> Home </mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.hometeam}}</mat-cell>
-          </ng-container>
-        
-
-          <ng-container matColumnDef="o_ah1">
-              <mat-header-cell *matHeaderCellDef> 1 </mat-header-cell>
-              <mat-cell *matCellDef="let element">{{element.o_ah1}}</mat-cell>
-              <ng-container matColumnDef="c_ah1">
-                  <mat-cell *matCellDef="let element">{{element.c_ah1}}</mat-cell>
-              </ng-container>
-              
-
-          </ng-container>
-        
-
-          <ng-container matColumnDef="o_ah2">
-            <mat-header-cell *matHeaderCellDef> 2 </mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.o_ah2}}</mat-cell>
-          </ng-container>
-
-
-          <ng-container matColumnDef="awayteam">
-            <mat-header-cell *matHeaderCellDef> Away </mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.awayteam}}</mat-cell>
-          </ng-container>
-                
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table> -->
-
-      <div class="row">
-          <div class="flex__item flex-cdate header">Time</div>
-          <div class="flex__item header">Home Team</div>
-          <div class="flex__item header">1</div>
-          <div class="flex__item header">2</div>
-          <div class="flex__item header">Away Team</div>
-      </div>
-      <div class="row" *ngFor="let team of teams; let idx = index; trackBy: trackElement">
-          <div class="flex__item flex-cdate">{{ team.dtime }}</div>
-          <div class="flex__item">{{ team.hometeam }}</div>
-          <div class="flex__item">
-            <div class="row1">
-              <div id="blinkodd1o-{{idx}}" class="flex__item1">{{ team.o_ah1 }}</div>
-              <!-- <input (change)="test()" class="flex__item1" id="ch1" type="text" value='{{team.c_ah1}}'> -->
-              <span id="blinkodd1c-{{idx}}" [ngStyle]="{'color':team.o_ah1 > team.c_ah1 ? 'yellow' : 'blue' }">{{ team.c_ah1 }}</span>
-            </div>
+      <ng-container *ngIf="showodds">
+        <section class="showme">  <!-- LIJEVA STRANA-->
+          <div class="row">
+              <div class="flex__item flex-cdate header">Time</div>
+              <div class="flex__item header">Home Team</div>
+              <div class="flex__item header">1</div>
+              <div class="flex__item header">2</div>
+              <div class="flex__item header">Away Team</div>
           </div>
-          <div class="flex__item">
-            <div class="row1">
-              <div id="blinkodd2o-{{idx}}" class="flex__item1">{{ team.o_ah2 }}</div>
-              <span id="blinkodd2c-{{idx}}" [ngStyle]="{'color':team.o_ah2 > team.c_ah2 ? 'yellow' : 'blue' }">{{ team.c_ah2 }}</span>
-              <!-- <div id="target" [ngStyle]="{'color':team.o_ah2 > team.c_ah2 ? 'yellow' : 'blue' }">{{ team.c_ah2 }}</div> -->
-            </div>
+          <div class="row" *ngFor="let team of teams; let idx = index; trackBy: trackElement">
+              <div class="flex__item flex-cdate">{{ team.dtime }}</div>
+              <div class="flex__item">{{ team.hometeam }}</div>
+              <div class="flex__item">
+                <div class="row1">
+                  <div id="blinkodd1o-{{idx}}" class="flex__item1">{{ team.o_ah1 }}</div>
+                  <!-- <input (change)="test()" class="flex__item1" id="ch1" type="text" value='{{team.c_ah1}}'> -->
+                  <span id="blinkodd1c-{{idx}}" [ngStyle]="{'color':team.o_ah1 > team.c_ah1 ? 'yellow' : 'blue' }">{{ team.c_ah1 }}</span>
+                </div>
+              </div>
+              <div class="flex__item">
+                <div class="row1">
+                  <div id="blinkodd2o-{{idx}}" class="flex__item1">{{ team.o_ah2 }}</div>
+                  <span id="blinkodd2c-{{idx}}" [ngStyle]="{'color':team.o_ah2 > team.c_ah2 ? 'yellow' : 'blue' }">{{ team.c_ah2 }}</span>
+                  <!-- <div id="target" [ngStyle]="{'color':team.o_ah2 > team.c_ah2 ? 'yellow' : 'blue' }">{{ team.c_ah2 }}</div> -->
+                </div>
+              </div>
+              <div class="flex__item">{{ team.awayteam }}</div>
           </div>
-          <div class="flex__item">{{ team.awayteam }}</div>
-      </div>
-    </section> <!--END LIJEVA STRANA-->
+        </section> <!--END LIJEVA STRANA-->
+      </ng-container>
     <div>
       <section class="showme">  <!-- DESNA STRANA-->
         <app-tiket></app-tiket>

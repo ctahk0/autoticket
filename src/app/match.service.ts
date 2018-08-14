@@ -22,6 +22,11 @@ export class MatchService {
   //     http://www.oddsmath.com/api/v1/dropping-odds.json/?provider_id=1&cat_id=4&interval=5184000&sortBy=1&limit=100&language=en // AH0
   url = 'http://www.oddsmath.com/api/v1/dropping-odds.json/?provider_id=1&cat_id=4&interval=5184000&sortBy=1&limit=100&language=en';
   // url = 'http://localhost:3000/data';
+
+  // change this for production
+  prodUrl = 'locapi';
+  // prodUrl = 'localhost:4200';
+
 datajsn: Object;
 tiketjsn: Object;
 
@@ -47,7 +52,7 @@ tiketjsn: Object;
         res => { // Success
           this.datajsn = res['data'];
           // sada saljemp post na PHP
-          const locURL = `locapi/insertmatch.php`;
+          const locURL = `${this.prodUrl}/insertmatch.php`;
           this.http.post(locURL, this.datajsn, httpOptions).toPromise().then(
             res1 => {
               console.log('Match: ', res1);
@@ -63,8 +68,8 @@ tiketjsn: Object;
     /** INSERT tiket */
     insertTiket(tiket) {
 
-      // locapi/insertmatch.php'
-      const locURL = `locapi/inserttiket.php`;
+      // /insertmatch.php'
+      const locURL = `${this.prodUrl}/inserttiket.php`;
       const promise = new Promise((resolve, reject) => {
             this.http.post(locURL, tiket, httpOptions).toPromise().then(
               res1 => {
@@ -77,16 +82,15 @@ tiketjsn: Object;
     return promise;
     }
 
-    /** READ tiket */
-      /** Read */
+  /** READ tiket */
   readTiket(): Observable<any> {
-    const locURL = `locapi/select.php?tbl=qtiket`;
+    const locURL = `${this.prodUrl}/select.php?tbl=qtiket`;
     return this.http.get(locURL);
   }
 
   /** DELETE */
   deleteTiket(id) {
-      const locURL = `locapi/deletetiket.php`;
+      const locURL = `${this.prodUrl}/deletetiket.php`;
       return this.http.post(locURL, { id: id }, httpOptions)
         .pipe(
           map((res) => res)
@@ -95,7 +99,7 @@ tiketjsn: Object;
 
   /** DELETE */
   updateTiket(rez, id) {
-      const locURL = `locapi/updatetiket.php`;
+      const locURL = `${this.prodUrl}/updatetiket.php`;
       return this.http.post(locURL, {
         id: id,
         rez: rez
