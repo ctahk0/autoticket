@@ -14,9 +14,15 @@
           </button>
       </div>
       <span>&nbsp;</span>
-      <div>
+      <!-- <div>
           <button class='btn btn-info' (click)="toggleOdds()" id="bt1">
               {{ buttonOdds }}
+          </button>
+      </div> -->
+      <span>&nbsp;</span>
+      <div>
+          <button class='btn btn-info' (click)="toggleTiket()" id="bt2">
+              {{ buttonTiket }}
           </button>
       </div>
       <div style="text-align:right; min-width: 80%;">
@@ -29,40 +35,15 @@
   </div>
   </header>
   <div class="box">
-      <ng-container *ngIf="showodds">
-        <section class="showme">  <!-- LIJEVA STRANA-->
-          <div class="row">
-              <div class="flex__item flex-cdate header">Time</div>
-              <div class="flex__item header">Home Team</div>
-              <div class="flex__item header">1</div>
-              <div class="flex__item header">2</div>
-              <div class="flex__item header">Away Team</div>
-          </div>
-          <div class="row" *ngFor="let team of teams; let idx = index; trackBy: trackElement">
-              <div class="flex__item flex-cdate">{{ team.dtime }}</div>
-              <div class="flex__item">{{ team.hometeam }}</div>
-              <div class="flex__item">
-                <div class="row1">
-                  <div id="blinkodd1o-{{idx}}" class="flex__item1">{{ team.o_ah1 }}</div>
-                  <!-- <input (change)="test()" class="flex__item1" id="ch1" type="text" value='{{team.c_ah1}}'> -->
-                  <span id="blinkodd1c-{{idx}}" [ngStyle]="{'color':team.o_ah1 > team.c_ah1 ? 'yellow' : 'blue' }">{{ team.c_ah1 }}</span>
-                </div>
-              </div>
-              <div class="flex__item">
-                <div class="row1">
-                  <div id="blinkodd2o-{{idx}}" class="flex__item1">{{ team.o_ah2 }}</div>
-                  <span id="blinkodd2c-{{idx}}" [ngStyle]="{'color':team.o_ah2 > team.c_ah2 ? 'yellow' : 'blue' }">{{ team.c_ah2 }}</span>
-                  <!-- <div id="target" [ngStyle]="{'color':team.o_ah2 > team.c_ah2 ? 'yellow' : 'blue' }">{{ team.c_ah2 }}</div> -->
-                </div>
-              </div>
-              <div class="flex__item">{{ team.awayteam }}</div>
-          </div>
-        </section> <!--END LIJEVA STRANA-->
-      </ng-container>
     <div>
-      <section class="showme">  <!-- DESNA STRANA-->
+      <ng-container *ngIf="showtiket">
         <app-tiket></app-tiket>
-      </section>
+      </ng-container>
+    </div>
+    <div>
+      <ng-container *ngIf="showuotiket">
+        <app-tiketuo></app-tiketuo>
+      </ng-container>
     </div>
   </div>  <!-- END BOX CONTAINER-->
 </div> <!-- END MAIN CONTAINER-->

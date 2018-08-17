@@ -45,12 +45,15 @@ import {
   MatTreeModule,
 } from '@angular/material';
 import { TiketComponent } from './tiket/tiket/tiket.component';
+import { TiketUOComponent } from './tiket/tiketuo/tiketuo.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    TiketComponent
+    TiketComponent,
+    TiketUOComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { interval } from 'rxjs';
 import { Tim } from './timovi';
 import { SerPravilaService } from './pravila/serPravila.service';
 import { TiketComponent } from './tiket/tiket/tiket.component';
+import { TiketUOComponent } from './tiket/tiketuo/tiketuo.component';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,14 @@ import { TiketComponent } from './tiket/tiket/tiket.component';
 
 export class AppComponent {
   @ViewChild(TiketComponent) child: TiketComponent;
+  @ViewChild(TiketComponent) child1: TiketUOComponent;
   show = false;
   showodds = false;
+  showtiket = true;
+  showuotiket = false;
   buttonName = 'Pravila';
   buttonOdds = 'Show odds';
+  buttonTiket = 'Tiket U/O 2.5';
   title = 'Hello there';
   teams = [];
   a = 30;
@@ -44,16 +49,17 @@ export class AppComponent {
         // tslint:disable-next-line:triple-equals
         if (this.a == 10) {
           // console.log('sad okidaj', this.a);
-          this.insertMatches();
+          // this.insertMatches();
         // tslint:disable-next-line:triple-equals
         } else if (this.a == 5) {
-          this.playTiket();
+          // this.playTiket();
         // tslint:disable-next-line:triple-equals
         } else if (this.a == 0) {
           this.a = 30;
           this.getOdds();
           // this.playTiket();
           this.child.updateTiket();
+          this.child1.updateTiket();
         }
       }
     );
@@ -172,8 +178,15 @@ export class AppComponent {
 
   toggleOdds() {
     this.showodds = !this.showodds;
+    this.showuotiket = !this.showuotiket;
     // CHANGE THE NAME OF THE BUTTON.
     this.showodds ? this.buttonOdds = 'Hide' : this.buttonOdds = 'Show odds';
+  }
+  toggleTiket() {
+    this.showuotiket = !this.showuotiket;
+    this.showtiket = !this.showtiket;
+    // CHANGE THE NAME OF THE BUTTON.
+    this.showuotiket ? this.buttonTiket = 'Tiket AH0' : this.buttonTiket = 'Tiket U/O 2.5';
   }
 
   trackElement(index: string, element: any) {

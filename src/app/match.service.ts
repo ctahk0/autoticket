@@ -9,8 +9,7 @@ import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'Content-Type':  'application/json'
   })
 };
 
@@ -24,8 +23,8 @@ export class MatchService {
   // url = 'http://localhost:3000/data';
 
   // change this for production
-  prodUrl = 'locapi';
-  // prodUrl = 'localhost:4200';
+  // prodUrl = 'locapi';
+  prodUrl = '/odds/php';
 
 datajsn: Object;
 tiketjsn: Object;
@@ -33,7 +32,7 @@ tiketjsn: Object;
   constructor(private http: HttpClient) { }
 
   getData(): Observable<any> {
-    // const apiURL = `${this.url}&callback=ng_jsonp_callback_0`;
+
     const apiURL = `http://japauto.parts:8080/${this.url}`;
     // const apiURL = `${this.url}`;
     return this.http.get(apiURL);
@@ -41,8 +40,6 @@ tiketjsn: Object;
 
   /** POST: add a new hero to the database */
   insertData() {
-
-    // locapi/insertmatch.php'
     const apiURL = `http://japauto.parts:8080/${this.url}`;
     const promise = new Promise((resolve, reject) => {
     // const apiURL = `locapi/insertmatch.php`;
@@ -84,10 +81,13 @@ tiketjsn: Object;
 
   /** READ tiket */
   readTiket(): Observable<any> {
-    const locURL = `${this.prodUrl}/select.php?tbl=qtiket`;
+    const locURL = `${this.prodUrl}/select.php?tbl=t1`;
     return this.http.get(locURL);
   }
-
+  readTiket1(): Observable<any> {
+    const locURL = `${this.prodUrl}/select.php?tbl=t2`;
+    return this.http.get(locURL);
+  }
   /** DELETE */
   deleteTiket(id) {
       const locURL = `${this.prodUrl}/deletetiket.php`;

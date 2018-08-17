@@ -16,11 +16,13 @@ const httpOptions = {
 })
 export class SerPravilaService {
   pravilas: TblPravilo[];
+  // _url = 'locapi';
+  _url = '/odds/php';  // for production url
   constructor(private _http: HttpClient) { }
 
   /** Read */
   readPravila(): Observable<TblPravilo[]> {
-    const locURL = `locapi/select.php?tbl=pravila`;
+    const locURL = `${this._url}/select.php?tbl=pravila`;
     return (this._http.get(locURL)
       .pipe(
         map(res => res as TblPravilo[])
@@ -29,7 +31,7 @@ export class SerPravilaService {
 
   /** INSERT */
   insertPravila(pravilo): Observable<TblPravilo[]> {
-    const locURL = `locapi/insertpravilo.php`;
+    const locURL = `${this._url}/insertpravilo.php`;
     return this._http.post(
       locURL,
       pravilo,
@@ -42,7 +44,7 @@ export class SerPravilaService {
 
   /** DELETE */
   deletePravilo(id) {
-    const locURL = `locapi/deletepravilo.php`;
+    const locURL = `${this._url}/deletepravilo.php`;
     return this._http.post(locURL, { id: id }, httpOptions)
       .pipe(
         map((res) => res)
