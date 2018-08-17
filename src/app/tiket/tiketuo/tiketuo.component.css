@@ -1,0 +1,24 @@
+.btnloss {
+    color: red;
+    /* background-color: brown; */
+}
+.btnwin {
+    color: green;
+}
+.mat-button-toggle-checked {
+    background-color: #c5c5c5;
+}
+.mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.left, .right {
+    display: inline-block;
+    width: 50%;
+}
